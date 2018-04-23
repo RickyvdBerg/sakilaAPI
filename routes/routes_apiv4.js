@@ -60,6 +60,7 @@ router.get('/actors/:id?', (req, res, next) => {
 router.post('/actors', (req, res, next) => {
 
     let actor = req.body;
+    console.log(req.body)
 
     const query = {
         sql: 'INSERT INTO `actor`(first_name, last_name) VALUES (?, ?)',
