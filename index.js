@@ -36,6 +36,7 @@ app.use(express.static(__dirname + '/public'));
 // Routing with versions
 app.use('/apiv1', require('./routes/routes_apiv1'));
 app.use('/apiv3', require('./routes/routes_apiv3'));
+app.use('/apiv4', require('./routes/routes_apiv4'));
 
 // Handle all errors
 app.use((err, req, res, next) => {
