@@ -63,7 +63,7 @@ router.post('/actors', (req, res, next) => {
     console.log(req.body)
 
     const query = {
-        sql: 'INSERT INTO `actor`(first_name, last_name) VALUES ($1, $2)',
+        sql: 'INSERT INTO actor(first_name, last_name) VALUES ($1, $2)',
         values: [actor.first_name, actor.last_name ],
     };
 
