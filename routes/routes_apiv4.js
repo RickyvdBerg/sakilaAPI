@@ -62,7 +62,10 @@ router.post('/actors', (req, res, next) => {
     let actor = req.body;
     console.log(req.body)
 
-    const query =  "INSERT INTO actor(first_name, last_name)" + ` VALUES (${actor.first_name}, ${actor.last_name})`
+    const query = {
+        sql: 'INSERT INTO `actor`(first_name, last_name) VALUES (?, ?)',
+        values: [actor.first_name, actor.last_name ],
+    };
 
     console.log('QUERY: ' + query.sql);
     pool.connect((err, client, done) => {
