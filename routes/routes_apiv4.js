@@ -24,7 +24,7 @@ router.get('/actors/:id?', (req, res, next) => {
     if (actorId === null) {
         pool.connect((err, client, done) => {
             if (err) throw err
-            pool.query(`SELECT TOP 20 * FROM dbo.actor`, (err, result) => {
+            pool.query(`SELECT * FROM actor`, (err, result) => {
                 done()
 
                 if (err) {
@@ -40,7 +40,7 @@ router.get('/actors/:id?', (req, res, next) => {
     else {
         pool.connect((err, client, done) => {
             if (err) throw err
-            pool.query(`SELECT * FROM dbo.actor WHERE actor_id = ${actorId}`, (err, result) => {
+            pool.query(`SELECT * FROM actor WHERE actor_id = ${actorId}`, (err, result) => {
                 done()
 
                 if (err) {
@@ -63,14 +63,13 @@ router.post('/actors', (req, res, next) => {
     console.log(req.body)
 
     const query = {
-        sql: 'INSERT INTO `actor`(first_name, last_name) VALUES (?, ?)',
-        values: [actor.first_name, actor.last_name]
+        sql: `INSERT INTO actor(first_name, last_name) VALUES (${actor.first_name}, ${actor.last_name})`,
     };
 
     console.log('QUERY: ' + query.sql);
     pool.connect((err, client, done) => {
         if (err) throw err
-        pool.query(query, (error, result) => {
+        pool.query(query.sql, (error, result) => {
             done()
 
             if (error) {
@@ -81,7 +80,6 @@ router.post('/actors', (req, res, next) => {
         })
     })
     //res.status(200).json('ok')
-
 });
 
 
